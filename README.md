@@ -46,3 +46,9 @@ python NestorBot.py
 ```
 3. Launch the botframework emulator you installed above and load the ``` http://localhost:3978/api/messages``` address
 4. The app should be booted by now. You see the screen below.
+![botframework start][start]
+
+
+[start]:(https://drive.google.com/open?id=1MY7Xr_34R7prSFdf6zgWQKg1fV7DlzVR)
+[mail]: (https://drive.google.com/open?id=1DH9WMAmc-JiyK8Le0dfXiKLXE8LvE5LV)
+[report]:(https://drive.google.com/open?id=1MIOzIaOCo2IfrwaxMi9KZmWH5u0pzLeZ)
