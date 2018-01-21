@@ -28,7 +28,9 @@ _Prerequisite : Python 3 (Anaconda preferred in case of windows)_
 git clone https://github.com/amartyaamp/NestorBot.git
 ```
 #### Running Nestor
-1. Nestor currently uses SMTP library which requires SMTP server name and the source authentication details.
+Nestor currently uses SMTP library which requires SMTP server name and port.  
+Also, you need to give a source mail id and password to mail someone.
+
 In the constants.py file - fill destination SMTP server details, and your authentication details - mail id and password.  
 ```
 #SMTP details for Outlook
