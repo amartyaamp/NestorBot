@@ -49,6 +49,6 @@ python NestorBot.py
 ![botframework start][start]
 
 
-[start]:(https://drive.google.com/open?id=1MY7Xr_34R7prSFdf6zgWQKg1fV7DlzVR)
-[mail]: (https://drive.google.com/open?id=1DH9WMAmc-JiyK8Le0dfXiKLXE8LvE5LV)
-[report]:(https://drive.google.com/open?id=1MIOzIaOCo2IfrwaxMi9KZmWH5u0pzLeZ)
+[start]:(https://www.dropbox.com/s/67x5wmyh4oprkf1/botframework_start.PNG?dl=0)
+[mail]: (https://www.dropbox.com/s/67x5wmyh4oprkf1/botframework_start.PNG?dl=0)
+[report]:(https://www.dropbox.com/s/67x5wmyh4oprkf1/botframework_start.PNG?dl=0)
