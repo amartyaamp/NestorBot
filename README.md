@@ -4,7 +4,7 @@
 Have you ever wondered about the usual day at work?
 You get to office, check your important mails, reply or compose new urgent/important and set new tasks according to mail status.
 You also set new contacts on basis of the mails.
-Many mails are also 
+Many mails are also frequently repetitive - like the time you take the late office cab, or the status report to your boss.
 
 If you think you are spending more time on this (And can't outsource!) and have less time on actual work, Nestor can help you.
 
@@ -25,5 +25,30 @@ _Prerequisite : Python 3 (Anaconda preferred in case of windows)_
 2. Install pybotframework (This will install flask and other backbones of Nestor) - [PyBotFramework](https://github.com/michhar/pybotframework)
 3. Clone this repo -
 ```
-git clone ...
+git clone https://github.com/amartyaamp/NestorBot.git
 ```
+**Running Nestor**
+1. Nestor currently uses SMTP library which requires SMTP server name and the source authentication details.
+In the constants.py file - fill destination SMTP server details, and your authentication details - mail id and password.  
+```
+#SMTP details for Outlook
+SMTP_SERVER_OUTLOOK = "smtp-mail.outlook.com"
+SMTP_SERVER_PORT_OUTLOOK = 587
+
+#Source mail authentication details
+SOURCE_MAIL = "mailIdHere"
+SOURCE_PASSWORD = "passwordHere"
+```
+
+2. Run the flask app
+```
+python NestorBot.py
+```
+3. Launch the botframework emulator you installed above and load the ``` http://localhost:3978/api/messages``` address
+4. The app should be booted by now. You see the screen below.
+![botframework start][start]
+
+
+[start]:(https://www.dropbox.com/s/67x5wmyh4oprkf1/botframework_start.PNG?dl=0)
+[mail]: (https://www.dropbox.com/s/67x5wmyh4oprkf1/botframework_start.PNG?dl=0)
+[report]:(https://www.dropbox.com/s/67x5wmyh4oprkf1/botframework_start.PNG?dl=0)
