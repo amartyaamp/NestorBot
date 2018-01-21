@@ -1,0 +1,9 @@
+{"name": {"messages": ["Hi User"]},
+ "hello": {"messages": ["My name is Nestor", "What is your name?"]},
+ "bye":{"messages": ["Nice chatting with you! Goodbye."]},
+ "mailto":{"messages": ["Sure, whom do you wanna mail?"]},
+ "mailsub": {"messages":["Ok mailing to {}, please give Subject"]},
+ "mailbody": {"messages":["what do you want to say"]},
+ "mailsure": {"messages":["Here is the final view of the mail please confirm"]},
+ "mailsent": {"messages":["Your mail has been sent"]}
+}
