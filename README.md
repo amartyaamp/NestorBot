@@ -53,7 +53,7 @@ SOURCE_PASSWORD = "passwordHere"
 ```
 2. **Start the app and launch the emulator.**
 
-3. Nestor matches entities and intents through regex expressions for only. **Give keyword _"mail"_** to start a mail-sending conversation.
+3. Nestor matches entities and intents through regex expressions for now. **Give keyword _"mail"_** to start a mail-sending conversation.
 
 <img src="https://raw.githubusercontent.com/amartyaamp/NestorBot/master/res/img/botframework_mail.PNG" width="50%"></img>
 <img src="https://raw.githubusercontent.com/amartyaamp/NestorBot/master/res/img/botframework_mail_progress.PNG" width="45%"></img>
