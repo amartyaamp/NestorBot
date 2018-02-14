@@ -7,7 +7,10 @@ https://github.com/shankarj67/python-gmail-api
 
 Only works for sending mail without an attachment, I am planning to add more capability in the future
 
-Based on and using code from examples at: https://developers.google.com/gmail/api/
+Based on and using code from examples at: 
+https://developers.google.com/gmail/api/quickstart/python
+https://developers.google.com/gmail/api/guides/sending
+
 
 
 Install
