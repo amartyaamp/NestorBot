@@ -12,6 +12,7 @@ class StateMachine:
 
 		self.state = "START"
 		self.rulesDict = rules.send_mail_transitions
+
 		## TODO - self.context to store the user context
 
 	
@@ -61,7 +62,7 @@ class StateMachine:
 
 		#check the trigger type for current state
 		triggerType = self.rulesDict[self.state]['triggerType']
-		trigerValues = self.rulesDict[self.state]['triggerValue']
+		triggerValues = self.rulesDict[self.state]['triggerValue']
 		
 		if triggerType == "any":
 			res = True

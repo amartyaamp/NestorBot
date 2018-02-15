@@ -28,7 +28,7 @@ send_mail_transitions = {
   "RCPT": {
     "triggerType": "entity",
     "triggerValue": [
-      "mailid"
+      "mailid"          # mailid is a type, so the NLP engine should give us entity type with entity value
     ],
     "dest": "SUBJ",
     "msg": "Mailing to {}. Please enter subject.",
