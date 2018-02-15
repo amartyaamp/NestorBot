@@ -28,8 +28,18 @@ _Prerequisite : Python 3 (Anaconda preferred in case of windows)_
 git clone https://github.com/amartyaamp/NestorBot.git
 ```
 #### Running Nestor
-Nestor currently uses SMTP library which requires SMTP server name and port.  
-Also, you need to give a source mail id and password to mail someone.
+
+1. Run the flask app
+```
+python NestorBot.py
+```
+2. Launch the botframework emulator you installed above and load the ``` http://localhost:3978/api/messages``` address
+3. The app should be booted by now. You see the screen below.
+<img src="https://raw.githubusercontent.com/amartyaamp/NestorBot/master/res/img/botframework_start.PNG" width="50%"></img>
+
+#### Sending mail 
+1. **Configure your SMTP and authentication details**
+Nestor currently uses SMTP library which requires SMTP server name and port. Also, you need to give a source mail id and password to mail someone.
 
 In the constants.py file - fill destination SMTP server details, and your authentication details - mail id and password.  
 ```
@@ -41,17 +51,9 @@ SMTP_SERVER_PORT_OUTLOOK = 587
 SOURCE_MAIL = "mailIdHere"
 SOURCE_PASSWORD = "passwordHere"
 ```
+2. **Start the app and launch the emulator.**
 
-2. Run the flask app
-```
-python NestorBot.py
-```
-3. Launch the botframework emulator you installed above and load the ``` http://localhost:3978/api/messages``` address
-4. The app should be booted by now. You see the screen below.
-<img src="https://raw.githubusercontent.com/amartyaamp/NestorBot/master/res/img/botframework_start.PNG" width="50%"></img>
-
-#### Sending mail 
-Nestor matches entities and intents through regex expressions only. Give keyword "mail" to start a mail-sending conversation.
+3. Nestor matches entities and intents through regex expressions for now. **Give keyword _"mail"_** to start a mail-sending conversation.
 
 <img src="https://raw.githubusercontent.com/amartyaamp/NestorBot/master/res/img/botframework_mail.PNG" width="50%"></img>
 <img src="https://raw.githubusercontent.com/amartyaamp/NestorBot/master/res/img/botframework_mail_progress.PNG" width="45%"></img>
