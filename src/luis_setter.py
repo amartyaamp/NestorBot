@@ -2,17 +2,10 @@ import requests
 import json
 class LuisBotSetter(object):
   
-  headers = {
-    # Request headers
-    'Ocp-Apim-Subscription-Key': 'confidential key',
-  }
-  
   def getTokens (self, queryFromUser):
     mappingValue = ""  
-    stri = ""
-    intentFromQuery = ""
-    intentEntityDict = {}
-    entityList = []
+    
+
     params ={
       # Query parameter
       'q': 'please send an email to abc@gmail.com',
@@ -22,24 +15,30 @@ class LuisBotSetter(object):
       'spellCheck': 'false',
       'staging': 'false',
     }
+    headers = {
+    # Request headers
+    'Ocp-Apim-Subscription-Key': '21eecad1a8a04c9597a0c0375d24f3c0',
+    }
     params['q'] = queryFromUser
     try:
-      r = requests.get ('https://southeastasia.api.cognitive.microsoft.com/luis/v2.0/apps/24c19c39-9242-4cea-ab89-4213e1f146cc', headers = self.headers, params = params)
-	    #https://westus.api.cognitive.microsoft.com/api/v2.0/apps/24c19c39-9242-4cea-ab89-4213e1f146cc?subscription-key=ee8f4937e8c94ef9b79ce873d9cce89d&verbose=true&timezoneOffset=330&q=	
+      r = requests.get('https://southeastasia.api.cognitive.microsoft.com/luis/v2.0/apps/cc048297-20aa-4ab7-adee-9c33095edc63', headers = headers, params = params)
+      print ("Response - {}".format(r))
       entityIntent = r.json()
-      '''entityIntent = {"query":"turn on bed room light",
-      "topScoringIntent":{"intent":"homeautomation.turnon","score":0.987},
-      "entities":[{"entity":"bedroom","type":"homeautomation",}]}
-      '''
+      
       intentFromQuery = entityIntent.get('topScoringIntent')['intent']
+      intentEntityDict = {}
       intentEntityDict['intent'] = intentFromQuery
       entitiesFromQuery = entityIntent.get('entities')
+      entityList = []
+      
       for index, entities in enumerate(entitiesFromQuery): 
         if 'resolution' in entities.keys():
           mappingValue = entities.get('resolution')['values'][0].get('value')
         entityList.append(entities['entity']  + "(" + mappingValue + "),")
         #returnString = returnString + str(index)  + ":" + entities['entity'] + "(" + mappingValue + "),"
-        intentEntityDict['entity'] = entityList 
+        intentEntityDict['entity'] = entityList
+
       return json.dumps(intentEntityDict)
+    
     except Exception as e:
       print ("[Errno {0}] {1}".format(e.errno, e.strerror))
