@@ -9,9 +9,9 @@ def test_state_machine():
 	# 
 	# test 1 -- START to ROOT (should be automatic on creating the statemachine)
 	usrQuery = ""
-	token_dict = {"entities":[], "intent":""}
+	token_dict = {"entity":[], "intent":""}
 	sm = StateMachine()
-	print (sm.handleTokens(usrQuery, json.dumps(token_dict)))
+	print (sm.handleTokens("", json.dumps({"entity":[], "intent":""})))
 
 	#test 2	-- ROOT to RECIPIENT
 	usrQuery = "mail to abc@xyz.com"
@@ -21,14 +21,14 @@ def test_state_machine():
 	#test 3	-- WRONG VALUE !
 	usrQuery = "abc@xyz.com"
 	token_dict['intent'] = ""
-	token_dict['entities'] = ["", "", "abc@xyz.com"]
+	token_dict['entity'] = ["", "", "abc@xyz.com"]
 	print (sm.handleTokens(usrQuery, json.dumps(token_dict)))
 
 
 	#test 3	-- RECIPIENT to SUBJECT
 	usrQuery = "abc@xyz.com"
 	token_dict['intent'] = ""
-	token_dict['entities'] = ["", "mailid", "abc@xyz.com"]
+	token_dict['entity'] = ["", "mailid", "abc@xyz.com"]
 	print (sm.handleTokens(usrQuery, json.dumps(token_dict)))
 
 	#test 4 -- SUBJECT to BODY

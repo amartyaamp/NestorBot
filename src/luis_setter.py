@@ -22,7 +22,7 @@ class LuisBotSetter(object):
     params['q'] = queryFromUser
     try:
       r = requests.get('https://southeastasia.api.cognitive.microsoft.com/luis/v2.0/apps/cc048297-20aa-4ab7-adee-9c33095edc63', headers = headers, params = params)
-      print ("Response - {}".format(r))
+      print ("[luissetter log] Response - {}".format(r.json()))
       entityIntent = r.json()
       
       intentFromQuery = entityIntent.get('topScoringIntent')['intent']
@@ -32,11 +32,10 @@ class LuisBotSetter(object):
       entityList = []
       
       for index, entities in enumerate(entitiesFromQuery): 
-        if 'resolution' in entities.keys():
-          mappingValue = entities.get('resolution')['values'][0].get('value')
-        entityList.append(entities['entity']  + "(" + mappingValue + "),")
+        entityList.append((entities['entity'], entities['type']))
         #returnString = returnString + str(index)  + ":" + entities['entity'] + "(" + mappingValue + "),"
-        intentEntityDict['entity'] = entityList
+      
+      intentEntityDict['entity'] = entityList
 
       return json.dumps(intentEntityDict)
     
