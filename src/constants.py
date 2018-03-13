@@ -5,4 +5,4 @@ SMTP_SERVER_PORT_OUTLOOK = 587
 
 #Source mail authentication details
 SOURCE_MAIL = "team_nestorbot@hotmail.com"
-SOURCE_PASSWORD = "n35t0r!!"
+SOURCE_PASSWORD = "password"
