@@ -5,7 +5,7 @@ It consists of a state and a transition rules dictionary for different state
 import rules
 import json
 
-
+from message import Mail
 class StateMachine:
 
 	def __init__(self):
@@ -32,8 +32,7 @@ class StateMachine:
 	def changeState(self, token_dict):
 		# change the state if trigger is fired 
 
-		action, response = "none", "do you know english?? enter stop or \
-		abort to start again"
+		action, response = "none", "i don't understand you! Write abort to goto start..."
 		
 		#ensure the trigger has been fired
 		# if abort or stop in msg then goto start
@@ -43,15 +42,21 @@ class StateMachine:
 			self.state = "START"
 			response = "aborting ..."
 		elif self.triggerFired(token_dict['msg'],
-			token_dict['intent'], token_dict['entities']):
+			token_dict['intent'], token_dict['entity']):
 			
 			#change the state
-			print ("changing the state now")
+			print ("[smlog] changing the state now")
 			
 			action = self.rulesDict[self.state]["action"]
 			response = self.rulesDict[self.state]["msg"]
+			
+			if self.state == "RCPT":
+				# refining the response here to include the Entity value
+				# FIXME [hardcoding] assuming we have only the mail id as the msg in entity
+				response = response.format(token_dict["msg"])
+
 			self.state = self.rulesDict[self.state]["dest"]
-			print ("state changed to - {}".format(self.state))
+			print ("[smlog] state changed to - {}".format(self.state))
 			
 		return action, response
 
@@ -60,7 +65,11 @@ class StateMachine:
 
 		res = False;
 
-		#check the trigger type for current state
+		# triggertypes are figured out by entity values, so 
+		# filter the entities to get a list of entity types. eg. - mailid
+		entities = [x[1] for x in entities] # x - (entity_value, entity_type)
+
+		# check the trigger type for current state
 		triggerType = self.rulesDict[self.state]['triggerType']
 		triggerValues = self.rulesDict[self.state]['triggerValue']
 		

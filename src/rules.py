@@ -13,13 +13,13 @@ send_mail_transitions = {
       "any"
     ],
     "dest": "ROOT",
-    "msg": "Hi! My name is Nestor! I will take care of your communication.",
+    "msg": "Hi! My name is Nestor! I will take care of your mails.",
     "action": "none"
   },
   "ROOT": {
     "triggerType": "intent",
     "triggerValue": [
-      "mail"
+      "sendmail"
     ],
     "dest": "RCPT",
     "msg": "Sure whom do you wanna mail ?",
@@ -41,7 +41,7 @@ send_mail_transitions = {
     ],
     "dest": "BODY",
     "msg": "Ok got that! What do you want to say?",
-    "action": "store_subject"
+    "action": "store_subj"
   },
   "BODY": {
     "triggerType": "any",
@@ -58,9 +58,9 @@ send_mail_transitions = {
       "yes",
       "no"
     ],
-    "dest": "SENT",
+    "dest": "SENT", #FIXME - might not goto SENT always - couple dest with triggervalue
     "msg": "Sending your mail",
-    "action": "none"
+    "action": "send_mail"
   },
   "SENT": {
     "triggerType": "any",
