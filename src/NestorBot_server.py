@@ -8,6 +8,8 @@ from botbuilder.core import BotFrameworkAdapter
 from luis_setter import LuisBotSetter
 from state_machine import StateMachine
 from actions import Actions
+from attachments import get_attachments
+
 
 #Debugging only
 import pdb
@@ -30,15 +32,18 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
 	# create the activity object to send to channel
 	@staticmethod
-	def __create_reply_activity(request_activity, text):
-		return Activity(
+	def __create_reply_activity(request_activity, text, attachments=None):
+		reply_activity = Activity(
 			type=ActivityTypes.message,
 			channel_id=request_activity.channel_id,
 			conversation=request_activity.conversation,
 			recipient=request_activity.from_property,
 			from_property=request_activity.recipient,
 			text=text,
-			service_url=request_activity.service_url)
+			service_url=request_activity.service_url,
+			attachments=attachments)
+
+		return reply_activity
 
 	# conversationUpdate message marks on start of a conversation. REST response status code - 202
 	def __handle_conversation_update_activity(self, activity: Activity):
@@ -46,11 +51,11 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 		self.end_headers()
 		if activity.members_added[0].id != activity.recipient.id:
 			#change the state to ROOT
-			action, response = _sm.handleTokens("", json.dumps({"entity":[], "intent":""}))
+			action, response, _ = _sm.handleTokens("", json.dumps({"entity":[], "intent":""}))
 			# perform some action - although nothing happens in actual here!
 			_action_hnd.perform_action(action, activity.text)
-
-			self._adapter.send([BotRequestHandler.__create_reply_activity(activity, response)])
+			attachments = get_attachments()
+			self._adapter.send([BotRequestHandler.__create_reply_activity(activity, response, attachments)])
 
 	# inConversation messages -  within a conversation. REST response status code - 200
 	def __handle_message_activity(self, activity: Activity):
@@ -59,13 +64,23 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 		# get the entities, intent from NLP engine - LUISBot for now
 		tokens = _nlp.getTokens(activity.text)
 		print ("[log] - got tokens - {}".format(tokens))
-		# change state
-		action, response = _sm.handleTokens(activity.text, tokens)
 
-		# by action code, do a background processing
-		_action_hnd.perform_action(action, activity.text)
-		# send the message to channel
-		self._adapter.send([BotRequestHandler.__create_reply_activity(activity, response)])
+		runLoop, firstPass = False, True
+		usrQuery = activity.text
+		while runLoop or firstPass:
+			firstPass = False # we don't have do-while in python :(
+
+			# change state
+			action, response, runLoop = _sm.handleTokens(usrQuery, tokens)
+
+			# by action code, do a background processing
+			_action_hnd.perform_action(action, usrQuery)
+			# send the message to channel
+			self._adapter.send([BotRequestHandler.__create_reply_activity(activity, response)])
+			#reset the usrQuery
+			usrQuery = ""
+
+
 
 	# messages not understood by the bot
 	def __unhandled_activity(self):
