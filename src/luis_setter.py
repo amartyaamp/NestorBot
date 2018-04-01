@@ -1,5 +1,7 @@
 import requests
 import json
+from constants import *
+
 class LuisBotSetter(object):
   
   def getTokens (self, queryFromUser):
@@ -15,13 +17,17 @@ class LuisBotSetter(object):
       'spellCheck': 'false',
       'staging': 'false',
     }
+
     headers = {
     # Request headers
-    'Ocp-Apim-Subscription-Key': '21eecad1a8a04c9597a0c0375d24f3c0',
+    'Ocp-Apim-Subscription-Key': LUIS_API_SUBSCRIPTION,
     }
+    
     params['q'] = queryFromUser
     try:
-      r = requests.get('https://southeastasia.api.cognitive.microsoft.com/luis/v2.0/apps/cc048297-20aa-4ab7-adee-9c33095edc63', headers = headers, params = params)
+
+      r = requests.get('https://southeastasia.api.cognitive.microsoft.com/luis/v2.0/apps/'+ LUIS_APP_KEY, headers = headers, params = params)
+
       print ("[luissetter log] Response - {}".format(r.json()))
       entityIntent = r.json()
       
