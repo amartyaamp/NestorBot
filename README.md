@@ -9,7 +9,7 @@ Many mails are also frequently repetitive - like the time you take the late offi
 If you think you are spending more time on this (And can't outsource!) and have less time on actual work, Nestor can help you.
 
 #### Features planned (in no particular order)
-- Create and send mail [*Working with simple smtplib*]
+- Create and send mail [*Working with smtplib and GMail API*]
 - Read important mails - user requests [*Not yet started*]
 - Send calendar meeting invites and fix non-conflicting times [*Not yet started*]
 - Add contacts [*Not yet started*]
