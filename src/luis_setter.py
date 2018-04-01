@@ -25,7 +25,9 @@ class LuisBotSetter(object):
     
     params['q'] = queryFromUser
     try:
+
       r = requests.get('https://southeastasia.api.cognitive.microsoft.com/luis/v2.0/apps/'+ LUIS_APP_KEY, headers = headers, params = params)
+
       print ("[luissetter log] Response - {}".format(r.json()))
       entityIntent = r.json()
       
