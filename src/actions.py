@@ -35,7 +35,7 @@ class Actions:
 		if action == "send_mail":
 			self.send_mail()
 		elif action == "wait_20":
-			sleep(20)
+			sleep(5)
 		elif action == "store_body":
 			self.store_items(text, "body")
 		elif action == "store_subj":

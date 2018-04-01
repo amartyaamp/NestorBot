@@ -67,7 +67,7 @@ send_mail_transitions = {
     "triggerValue": [
       "any"
     ],
-    "dest": "ROOT",
+    "dest": "START",
     "msg": "Your mail has been sent",
     "action": "wait_20"
   }

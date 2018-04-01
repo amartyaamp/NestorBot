@@ -20,13 +20,19 @@ class StateMachine:
 
 		print(usrQuery)
 
+		# this var decides recurrent message handling
+		runLoop = False # especially used for start state
+
 		token_dict = json.loads(tokens)
 		token_dict["msg"] = usrQuery
 		print("token_dict to changeState - {}".format(token_dict["msg"]))
 		## change state
 		action, response = self.changeState(token_dict)
+		
+		if self.state == "START":
+			runLoop = True
 
-		return action, response
+		return action, response, runLoop
 
  
 	def changeState(self, token_dict):
@@ -57,7 +63,8 @@ class StateMachine:
 
 			self.state = self.rulesDict[self.state]["dest"]
 			print ("[smlog] state changed to - {}".format(self.state))
-			
+		
+		
 		return action, response
 
 
