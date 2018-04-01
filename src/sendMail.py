@@ -1,6 +1,7 @@
 import smtplib
 from email.message import EmailMessage
 from constants import *
+from GmailSend import Gmail
 
 """
 send_mail - simply send a message using the smtplib library
@@ -38,4 +39,7 @@ def send_mail(recipient="", subject="", body=""):
 
 	server.quit()
 
-	
+
+def send_mail_gmail(recipient="", subject="", body=""):
+	Gmail().send_mail(recipient, subject, body)
+

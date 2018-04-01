@@ -1,4 +1,4 @@
-from sendMail import send_mail
+from sendMail import send_mail, send_mail_gmail
 from time import sleep
 from message import Mail
 """
@@ -26,7 +26,7 @@ class Actions:
 
 	def send_mail(self):
 		print ("[actionlog] - mailing to {} with sub - {} and {}".format(self.mail.mailid, self.mail.subj, self.mail.body))
-		send_mail(self.mail.mailid, self.mail.subj, self.mail.body)
+		send_mail_gmail(self.mail.mailid, self.mail.subj, self.mail.body)
 
 	
 	def perform_action(self, action, text):
