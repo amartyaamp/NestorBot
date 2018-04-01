@@ -12,8 +12,8 @@ from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
 from googleapiclient.discovery import build
-from settings import sender_address
 from apiclient import errors
+from constants import *
 
 # --------------------------------------------------------------------------------------
 # This is the name of the secret file you download from https://console.developers.google.com/iam-admin/projects
@@ -23,9 +23,9 @@ CLIENT_SECRET_FILE = 'client_secret.json'
 # this is the first time authentication, mean you don't have to re-authenticate each time you connect to the API.
 # Give it a unique name
 # keep this file in safe place, don't share this with anyone
-CREDENTIAL_FILE = 'Microsoft_chatBot.json'
+CREDENTIAL_FILE = 'nestorbot_gmail.json'
 
-APPLICATION_NAME = 'Microsoft_chatBot'
+APPLICATION_NAME = 'NestorBot'
 # Set to True if you want to authenticate manually
 # Set to False if you want to authenticate via browser redirect.
 MANUAL_AUTH = True
@@ -49,14 +49,12 @@ SCOPES = ['https://mail.google.com/',
 class Gmail():
     """ This class send mail to recipient using Gmail API """
 
-    def __init__(self):
-        pass
-
     def send_mail(self, recipient_address, subject, body):
         print('Sending your message, please wait...')
         try:
-            message = self.__create_message(sender_address, recipient_address, subject, body)
-            credentials = self.get_credentials()
+            message = self.__create_message(SOURCE_GMAIL, recipient_address, subject, body)
+            
+            credentials = self.get_credentials() # obtains credential from store
             service = self.__build_service(credentials)
             raw = message['raw']
             raw_decoded = raw.decode("utf-8")
@@ -85,12 +83,13 @@ class Gmail():
         if not os.path.exists(credential_dir):
             os.makedirs(credential_dir)
         credential_path = os.path.join(credential_dir,
-                                       'nestorbot_gmail.json')
+                                       CREDENTIAL_FILE)
 
         store = Storage(credential_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
-            flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+            flow = client.flow_from_clientsecrets(
+              os.path.join(CLIENT_SECRET_PATH, CLIENT_SECRET_FILE), SCOPES)
             flow.user_agent = APPLICATION_NAME
             if flags:
                 credentials = tools.run_flow(flow, store, flags)
@@ -155,16 +154,15 @@ class Gmail():
 
 
 def main():
-  import pdb; pdb.set_trace()
-  A = Gmail()
-  A.get_credentials()
+  #A = Gmail()
+  #A.get_credentials()
 
 
   to_address = input("enter recipient address: ")
   subject = input("enter subject: ")
   body = input("enter body: ")
 
-  A.send_mail(to_address, subject, body)
+  Gmail().send_mail(to_address, subject, body)
 
 
 if __name__ == "__main__":
