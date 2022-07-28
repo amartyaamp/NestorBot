@@ -1,6 +1,8 @@
 
 ### NESTORBot - Your companion to handle mails
 
+*[This project is no longer developed/maintained. Used for references only.]*
+
 Have you ever wondered about the usual day at work?
 You get to office, check your important mails, reply or compose new urgent/important and set new tasks according to mail status.
 You also set new contacts on basis of the mails.
